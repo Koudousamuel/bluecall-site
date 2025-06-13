@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title translate="no">Detail - BlueCall</title>
+    <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5 p-4 bg-light rounded">
+        <h2 class="text-center mb-4 fw-bold"> {{ product_object.title }} </h2>
+    
+        <div class="row align-items-start">
+            <div class="col-md-6 mb-3">
+                {% if product_object.image_file %}
+                    <img src="{{ product_object.image_file.url }}" alt="Product image" class="img-fluid border rounded">
+                {% elif product_object.images %}
+                    <img src="{{ product_object.images }}" alt="Product image" class="img-fluid border rounded">
+                {% else %}
+                    <p>Aucune image disponible</p>
+                {% endif %}
+            </div>
+    
+            <div class="col-md-6 d-flex flex-column justify-content-start">
+                <h3 class="text-primary fw-bold">{{ product_object.price }} FCFA</h3>
+                <p class="text-primary">En stock</p>
+                <button class="btn btn-outline-primary w-50" onclick="ajouterEtAllerAuPanier()">Acheter</button>
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div class="mt-4">
+            <h4>Description</h4>
+            <p>{{ product_object.description }}</p>
+        </div>
+    
+        <div class="mt-4">
+            <h5>Informations supplémentaires</h5>
+            <ul>
+                <li>Contacte Whatsapp: +225-07-97-14-50-38</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script JavaScript pour ajouter au panier et rediriger -->
+    <script>
+        function ajouterEtAllerAuPanier() {
+            const produitId = "{{ product_object.id }}";
+            const nom = "{{ product_object.title|escapejs }}";
+            const prix = parseFloat("{{ product_object.price }}"); // conversion en nombre
+    
+            let panier = JSON.parse(localStorage.getItem('panier')) || {};
+    
+            if (panier[produitId]) {
+                panier[produitId].quantite += 1;
+            } else {
+                panier[produitId] = {
+                    nom: nom,
+                    prix: prix,
+                    quantite: 1
+                };
+            }
+    
+            localStorage.setItem('panier', JSON.stringify(panier));
+    
+            // Redirection vers la page panier
+            window.location.href = "/panier";
+        }
+    </script>    
+</body>
+</html>
+

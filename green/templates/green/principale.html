@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Blue-Call</title>
+    <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #3B7BBF;
+        }
+    </style>
+</head>
+<body>
+
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3 shadow-lg text-center">
+
+          <!-- Logo -->
+          <div class="text-center">
+            <img src="{% static 'Green/images/Blue.jpg' %}" alt="Logo Blue-call" class="img-fluid my-3" style="max-width: 200px; height: auto;">
+          </div>
+
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2">Bienvenue sur <strong>Blue-Call</strong></h3>
+
+            {% if user.is_authenticated %}
+              <p class="mb-4">Vous êtes connecté en tant que <strong>{{ user.username }}</strong></p>
+              <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger btn-lg me-2">Se déconnecter</a>
+              <a href="{% url 'green:index' %}" class="btn btn-primary btn-lg">Continuer</a>
+            {% else %}
+              <p class="mb-4">Veuillez vous connecter ou vous inscrire pour continuer.</p>
+              <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg mb-2">Connexion</a><br>
+              <a href="{% url 'accounts:register' %}" class="btn btn-secondary btn-lg">Inscription</a>
+            {% endif %}
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

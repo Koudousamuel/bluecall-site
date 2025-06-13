@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title translate="no">Blue-Call</title>
+    <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Green/css/stylesutilisateur.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'Green/js/scripts.js' %}"></script>
+    
+    
+</head>
+<body>
+    <div class="contener">
+        <div class="row">
+            <div class="col-md-12"></div>
+
+          <div class="top-bar">
+            <header class="navbar d-flex align-items-center justify-content-between px-2 py-7">
+              <!-- Menu Offcanvas -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          
+              <!-- Logo + Titre -->
+              <div class="bloc-logo d-flex align-items-center">
+                  <a href="#"><img src="{% static 'Green/images/Blue.jpg' %}" alt="achat" style="height: 40px;"></a>
+                  <h1 class="ms-1 mb-0" translate="no">Blue-Call</h1>
+              </div>
+          
+              <!-- Barre de recherche -->
+              <nav class="searchbar">
+                  <form class="search-form d-flex">
+                      <input class="search-input form-control me-2" type="search" name="item-name" placeholder="Rechercher" aria-label="Search">
+                      <button class="search-btn btn-primary" type="submit">Rechercher</button>
+                  </form>
+              </nav>
+          
+              <!-- Panier -->
+              <div class="btn-group dropup me-2">
+                  <button id="panier" type="button" class="btn btn-secondary" data-html="true" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom eeeeeeh">
+                      Voir (0)
+                  </button>
+              </div>
+          
+              <!-- Icône utilisateur -->
+              <div class="user-iconne">
+                  <a href="{% url 'green:historique' %}"><img src="{% static 'Green/images/achat.png' %}" alt="Utilisateur" style="height: 35px;"></a>
+                  <a href="{% url 'green:profil' %}"><img src="{% static 'Green/images/utili1.png' %}" alt=""></a>
+              </div>
+          
+              <!-- Menu déroulant (Offcanvas) -->
+              <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                  <div class="offcanvas-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body" translate="no">
+                      <ul class="navbar-nav flex-column">
+                          <li class="nav-item"><a class="nav-link active" href="{% url 'green:maillot' %}">Maillots</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'green:sacs' %}">Sac</a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">Sous-vetement</a></li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Femme
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{% url 'green:femmevet' %}">Vetements</a></li>
+                                  <li><a class="dropdown-item" href="#">Sous-Vetements</a></li>
+                                  <li><a class="dropdown-item" href="#">Sac</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li>
+                                    <a class="dropdown-item btn btn-primary" href="https://wa.me/+2250797145038?text=Bonjour" target="_blank">
+                                      Service client WhatsApp
+                                    </a>
+                                  </li>
+                                  <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Deconnexion</a></li>  
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+          </header>
+          
+
+        </div>
+
+        {% block content %} {% endblock %}
+        
+    </div>
+    
+
+    {% block scripts %} 
+    {% endblock %}
+</body>
+<footer class="footer mt-5 p-4" style="background-color: #001f3f; color: white;">
+
+    {% block footer %}
+        <h5>✅ Bon à savoir</h5>
+        <p>Les produits présentés sur notre site peuvent être personnalisés selon vos préférences.
+            Vous avez repéré un article mais vous le souhaitez dans une autre couleur ou avec une petite variante ?
+            Pas de souci ! Il vous suffit de passer commande normalement et de préciser votre demande lors de l’appel de confirmation avec notre service client.
+            <br>Nous mettrons tout en œuvre pour répondre à vos envies et vous proposer une solution adaptée. Pour plus d'information sur la fonctionnement du site cliquer sur les informations en bas, Merci.</p>
+    {% endblock %}
+
+
+    <div class="mt-4 border-top pt-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-0">&copy; 2025 Blue-Call. Tous droits réservés.</p>
+      <div>
+        <a href="{% url 'green:savoir' %}" class="text-white text-decoration-underline me-3">Qui sommes-nous ?</a>
+        <a href="{% url 'green:condition' %}" class="text-white text-decoration-underline me-3">Conditions d’utilisation</a>
+        <a href="{% url 'green:politique' %}" class="text-white text-decoration-underline">Politique de confidentialité</a>
+      </div>
+    </div>
+</footer>
+
+</html>
+
+
+
