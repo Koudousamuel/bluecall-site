@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bluecall
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn grenn.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: monprojet.settings
+      - key: PYTHON_VERSION
+        value: 3.11
