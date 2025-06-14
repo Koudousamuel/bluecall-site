@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-k6u_wluxdcql(^w_y#)-ry+xf3nx1j-0a%p&ntx4ia@%798&g#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["bluecall-site.onrender.com"]
 
 
 # Application definition
