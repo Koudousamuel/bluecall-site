@@ -6,6 +6,8 @@ clr_loader==0.2.7.post0
 dj-database-url==3.0.0
 Django==5.2.3
 fpdf==1.7.2
+gunicorn==23.0.0
+packaging==25.0
 pillow==11.0.0
 proxy_tools==0.1.0
 pycparser==2.22
