@@ -1,9 +1,11 @@
-services:
+services: 
   - type: web
     name: bluecall
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn grenn.wsgi:application
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn monprojet.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: monprojet.settings
