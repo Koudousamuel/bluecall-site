@@ -10,8 +10,14 @@ from django.contrib.auth.models import User
 from .forms import PasswordResetRequestForm
 from .forms import NouveauMotDePasseForm
 
+from django.core.management import call_command
+from django.http import HttpResponse
 
 
+
+def run_migrations(request):
+    call_command('migrate')
+    return HttpResponse("Migrations effectuées avec succès !")
 
 def login_user(request):
     if request.method == 'POST':
