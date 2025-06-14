@@ -12,13 +12,16 @@ from .forms import NouveauMotDePasseForm
 
 from django.core.management import call_command
 from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
 
-
-
+@staff_member_required  #Optionnel : protège l'accès par compte admin
 def run_migrations(request):
-    call_command('migrate')
-    return HttpResponse("Migrations effectuées avec succès !")
-
+    try:
+        call_command('migrate')
+        return HttpResponse("✅ Migrations effectuées avec succès.")
+    except Exception as e:
+        return HttpResponse(f"❌ Erreur : {str(e)}")
+    
 def login_user(request):
     if request.method == 'POST':
         username = request.POST["username"]
