@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-k6u_wluxdcql(^w_y#)-ry+xf3nx1j-0a%p&ntx4ia@%798&g#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['bluecall-site.onrender.com']
 
 
 # Application definition
@@ -42,7 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'green',
     'accounts'
+    'cloudinary',
+    'cloudinary_storage',
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'mediaflows_0e282d9c-8420-488b-9cec-e59b3a5decd6',
+    'API_KEY': '421411498112542',
+    'API_SECRET': '0Yf9ULt43dxtZ4Tn8NVz1fLBC3g'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
