@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-k6u_wluxdcql(^w_y#)-ry+xf3nx1j-0a%p&ntx4ia@%798&g#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["bluecall-site.onrender.com"]
+ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -130,6 +130,7 @@ STATIC_URL = 'static/'
 # AJOUTE CETTE LIGNE pour corriger l'erreur :
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'green/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
