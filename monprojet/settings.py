@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-k6u_wluxdcql(^w_y#)-ry+xf3nx1j-0a%p&ntx4ia@%798&g#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bluecall-site.onrender.com']
+ALLOWED_HOSTS = ['bluecall-site.onrender.com', '127.0.0.1', 'localhost']
+
 
 
 # Application definition
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'green',
-    'accounts'
+    'accounts',
     'cloudinary',
     'cloudinary_storage',
 ]
@@ -51,6 +52,8 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '421411498112542',
     'API_SECRET': '0Yf9ULt43dxtZ4Tn8NVz1fLBC3g'
 }
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
