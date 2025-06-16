@@ -153,81 +153,80 @@
     background-color: #3B7BBF; /* un peu plus foncé pour l'effet hover */
   }
   
+/* Responsive : Garde le style PC mais ajuste proprement sur téléphone */
+@media (max-width: 968px) {
 
-
-  /* =======================
-   RESPONSIVE MOBILE
-========================== */
-@media (max-width: 768px) {
+    /* Navbar */
     .navbar {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 15px 10px;
+        align-items: center;
+        padding: 20px 10px;
+    }
+
+    /* Logo et titre */
+    .tittle {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
     }
 
     .tittle img {
         margin-left: 0;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
-
-    .tittle h1 {
+.tittle h1 {
         margin-left: 0;
-        font-size: 20px;
+        font-size: 1.2rem;
+        text-align: center;
     }
 
+    /* Barre de recherche */
     .searchbar {
-        width: 100%;
-        margin: 10px 0;
-        justify-content: center;
+        margin-top: 10px;
     }
 
     .search-input {
-        width: 70%;
-        font-size: 14px;
+        width: 90%; /* s’adapte à l’écran */
     }
 
-    .search-btn {
-        padding: 6px 12px;
-        font-size: 14px;
-    }
-
-    .user-icon {
-        gap: 10px;
-        margin-top: 10px;
-        margin-left: 0;
-    }
-
-    .user-icon img,
-    .user-iconne img {
-        margin-left: 0;
-    }
-
-    .categories {
+    .search-form {
         flex-direction: column;
-        align-items: center;
+        gap: 5px;
+    }
+ /* Icônes utilisateur */
+    .user-icon {
+        margin-top: 10px;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .user-icon img {
+        margin-left: 0;
+    }
+
+    /* Menu catégories */
+    .categories {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px;
         gap: 10px;
-        padding: 10px;
     }
 
     .filter-btn {
         padding: 10px 20px;
-        font-size: 14px;
-        width: 80%;
-        min-width: unset;
+        font-size: 0.9rem;
+        min-width: 150px;
+        white-space: nowrap;
     }
 
+    /* Ajustements généraux */
     .bloc-logo {
         margin-left: 0;
+        text-align: center;
     }
 
     .bloc-logo h1 {
-        font-size: 20px;
-        margin-left: 0;
-    }
-
-    .menu-toggle {
-        font-size: 20px;
-        padding: 5px;
-    }
+        margin-left: 0;
+    }
 }
