@@ -168,19 +168,19 @@
         display: flex;
         align-items: center;
         gap: 10px; /* espace entre le logo et le texte */
-        padding: 5px 10px;
+        padding: 2px 5px;
     }
 
     /* Logo */
     .tittle img {
-        width: 30px;
-        height: 30px;
+        width: 10px;
+        height: 10px;
         margin-left: 5px; /* petite marge depuis le bord gauche */
     }
 
     /* Titre du site */
     .tittle h1 {
-        font-size: 1.1rem; /* taille raisonnable sur téléphone */
+        font-size: 1rem; /* taille raisonnable sur téléphone */
         color: white;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
@@ -266,26 +266,25 @@
     }
 
 
-    /* Menu catégories avec défilement horizontal */
     .categories {
         display: flex;
-        flex-direction: row;      /* Alignement horizontal */
-        overflow-x: auto;         /* ➜ Active le scroll horizontal si besoin */
-        white-space: nowrap;      /* ➜ Empêche le retour à la ligne */
-        gap: 10px;
-        padding: 10px;
-        scrollbar-width: none;    /* (Optionnel) masque la barre de scroll sur Firefox */
+        flex-direction: row !important;  /* Force bien l'horizontale */
+        overflow-x: auto;                 /* Scroll horizontal si besoin */
+        white-space: nowrap;
+        gap: 6px;                         /* Moins d’espace entre les boutons */
+        padding: 5px 10px;
+ 
     }
 
-    .categories::-webkit-scrollbar {
-        display: none;            /* (Optionnel) masque la barre de scroll sur Chrome */
-    }
+.categories::-webkit-scrollbar {
+    display: none;
+}
 
-    .filter-btn {
-        flex-shrink: 0;           /* Empêche les boutons de rétrécir */
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 25px;
-        white-space: nowrap;      /* Garde le texte sur une seule ligne */
-    }
+.filter-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
 }
