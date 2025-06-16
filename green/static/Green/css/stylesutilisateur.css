@@ -205,8 +205,8 @@
     .searchbar {
         display: flex;
         justify-content: center;
-        padding: 5px 10px;
-        margin-left: 0;
+        padding: 3px 5px;
+        margin-left: 3;
         flex-wrap: wrap; /* Permet à la barre de recherche de passer à la ligne si nécessaire */
     }
 
@@ -214,29 +214,28 @@
     .search-form {
         display: flex;
         align-items: center;
-        gap: 5px; /* espace entre champ et bouton */
-        width: 100%;
-        max-width: 100%; /* empêche de dépasser l’écran */
+        gap: 1px; /* espace entre champ et bouton */
+        width: 50%;
+        max-width: 50%; /* empêche de dépasser l’écran */
     }
 
     /* Champ de recherche */
     .search-input {
-        flex: 1; /* prend tout l’espace dispo */
-        padding: 6px 10px;
+        width: 100px;            /* Fixe une largeur plus petite */
+        padding: 5px 10px;
         border: none;
         border-radius: 8px;
         font-size: 0.9rem;
-        min-width: 0;
     }
 
     /* Bouton de recherche */
     .search-btn {
-        padding: 6px 12px;
+        padding: 3px 6px;
         font-size: 0.9rem;
         background-color: #2d75c2;
         color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 6px;
         cursor: pointer;
     }
 
@@ -263,26 +262,30 @@
     .user-iconne img {
         width: 18px;
         height: 18px;
-        margin-left: 0;
+        margin-left:0;
     }
 
 
-    /* Menu catégories */
+    /* Menu catégories avec défilement horizontal */
     .categories {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px; /* ↓ Réduction de l’espace entre les boutons */
-        padding: 5px; /* ↓ Réduction du padding autour */
+        display: flex;
+        flex-direction: row;      /* Alignement horizontal */
+        overflow-x: auto;         /* ➜ Active le scroll horizontal si besoin */
+        white-space: nowrap;      /* ➜ Empêche le retour à la ligne */
+        gap: 10px;
+        padding: 10px;
+        scrollbar-width: none;    /* (Optionnel) masque la barre de scroll sur Firefox */
+    }
+
+    .categories::-webkit-scrollbar {
+        display: none;            /* (Optionnel) masque la barre de scroll sur Chrome */
     }
 
     .filter-btn {
-        padding: 6px 10px;
-        font-size: 12px;
-        width: 90%;
-    }
-
-    .menu-toggle {
-        font-size: 16px;
-        padding: 3px;
+        flex-shrink: 0;           /* Empêche les boutons de rétrécir */
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 25px;
+        white-space: nowrap;      /* Garde le texte sur une seule ligne */
     }
 }
