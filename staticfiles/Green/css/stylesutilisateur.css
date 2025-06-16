@@ -1,0 +1,156 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3B7BBF;
+    padding: 38px 2px;
+    width: 101%;
+}/* Menu burger */
+.menu-toggle {
+    font-size: 1.5625rem;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    background: none;
+    border: none;
+}
+.menu-toggle:hover {
+    color: #ddd;
+}
+
+
+/* Logo + titre */
+.tittle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 3px;
+}
+.tittle img {
+    width: 59px;
+    height: 59px;
+    margin-left: 100px;
+}
+.tittle h1 {
+    color: white;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    margin-left: -35px;
+}
+/* Conteneur de la barre de recherche */
+.searchbar {
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+/* Formulaire centré avec disposition horizontale */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Champ de recherche */
+.search-input {
+    width: 500px; /* tu peux l’allonger ici */
+    padding: 5px 10px;
+    border: None;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #1968be;
+    outline: none;
+}
+
+/* Bouton de recherche */
+.search-btn {
+    padding: 7px 20px;
+    background-color:#2d75c2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #1968be;
+}
+
+
+.user-icon {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.user-icon img {
+    width: 30px;
+    height: 30px;
+    margin-left: 180px;
+}
+.user-iconne img {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+.categorie { display: flex !important; }
+
+
+
+.categories {
+    display: flex;
+    justify-content: center; /* Centre les boutons */
+    gap: 20px; /* Réduit l'écart entre les boutons */
+    margin-top: 15px;
+    background-color: #3B7BBF;
+    flex-wrap: wrap; /* Permet aux boutons de s'ajuster sur plusieurs lignes si besoin */
+    padding: 3px 7px;  
+    width: 101%;
+
+}
+
+
+.filter-btn {
+    padding: 15px 40px;
+    border: none;
+    background-color: #3B7BBF;
+    color: white;
+    cursor: pointer;
+    border-radius: 25px;
+    min-width: 190px; /* Assure-toi que le bouton est suffisamment large */
+    white-space: nowrap; /* Empêche le texte de se casser en plusieurs lignes */
+}
+
+.filter-btn:hover {
+    background-color: #1968be;
+}
+
+
+.bloc-logo {
+    margin-left: -55px; /* ← ici tu ajustes la distance avec le bouton menu */
+}
+
+.bloc-logo h1 {
+    color: white;
+    font-size: 29px;
+    margin-left: 5px;
+}
+
+
+.btn-custom {
+    background-color: #3B7BBF;
+    color: white;
+    border: none;
+  }
+  
+  .btn-custom:hover {
+    background-color: #3B7BBF; /* un peu plus foncé pour l'effet hover */
+  }
+  
+
