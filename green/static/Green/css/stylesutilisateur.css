@@ -105,8 +105,7 @@
 
 .categories {
     display: flex;
-    justify-content: center; /* Centre les boutons */
-    gap: 20px; /* Réduit l'écart entre les boutons */
+    gap: 8px; /* Réduit l'écart entre les boutons */
     margin-top: 15px;
     background-color: #3B7BBF;
     flex-wrap: wrap; /* Permet aux boutons de s'ajuster sur plusieurs lignes si besoin */
@@ -157,11 +156,13 @@
 @media (max-width: 968px) {
 
     /* Navbar */
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 10px;
-    }
+.navbar {
+    flex-direction: row; /* ✅ horizontal */
+    align-items: center; /* ✅ centré verticalement */
+    justify-content: space-between; /* ✅ espace entre les blocs */
+    flex-wrap: wrap; /* permet un retour à la ligne si besoin */
+    padding: 10px;
+}
 
     /* Logo et titre */
     .tittle {
@@ -175,16 +176,32 @@
         width: 50px;
         height: 50px;
     }
-.tittle h1 {
-        margin-left: 0;
-        font-size: 1.2rem;
-        text-align: center;
+
+    .tittle h1 {
+    margin-left: 0;
+    font-size: 1rem; /* légèrement réduit pour mobile */
+    text-align: left; /* plus logique à côté du logo */
     }
+
 
     /* Barre de recherche */
     .searchbar {
         margin-top: 10px;
+        display: flex;
+        justify-content: center;
     }
+
+    .search-form {
+        flex-direction: row; /* 🧭 horizontal au lieu de colonne */
+        gap: 5px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-input {
+        width: 70%; /* s’adapte bien sans tout prendre */
+    }
+
 
     .search-input {
         width: 90%; /* s’adapte à l’écran */
@@ -194,11 +211,14 @@
         flex-direction: column;
         gap: 5px;
     }
- /* Icônes utilisateur */
+
+    /* Icônes utilisateur */
     .user-icon {
         margin-top: 10px;
         justify-content: center;
-        gap: 20px;
+        align-items: center;
+        display: flex;
+       gap: 15px;
     }
 
     .user-icon img {
