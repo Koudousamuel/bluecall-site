@@ -14,7 +14,8 @@ from django.core.management import call_command
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 
-
+def test_view(request):
+    return HttpResponse("TEST OK")
     
 def login_user(request):
     if request.method == 'POST':
