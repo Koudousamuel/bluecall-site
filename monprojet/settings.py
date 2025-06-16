@@ -136,6 +136,7 @@ STATIC_URL = 'static/'
 
 # AJOUTE CETTE LIGNE pour corriger l'erreur :
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'green/static')]
 
