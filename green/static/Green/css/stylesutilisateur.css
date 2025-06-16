@@ -153,100 +153,26 @@
   }
   
 /* Responsive : Garde le style PC mais ajuste proprement sur téléphone */
-@media (max-width: 968px) {
-
-    /* Navbar */
-.navbar {
-    flex-direction: row; /* ✅ horizontal */
-    align-items: center; /* ✅ centré verticalement */
-    justify-content: space-between; /* ✅ espace entre les blocs */
-    flex-wrap: wrap; /* permet un retour à la ligne si besoin */
-    padding: 10px;
-}
-
-    /* Logo et titre */
-    .tittle {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .tittle img {
-        margin-left: 0;
-        width: 50px;
-        height: 50px;
-    }
-
-    .tittle h1 {
-    margin-left: 0;
-    font-size: 1rem; /* légèrement réduit pour mobile */
-    text-align: left; /* plus logique à côté du logo */
-    }
-
-
-    /* Barre de recherche */
-    .searchbar {
-        margin-top: 10px;
+@media (max-width: 1068px) {
+    .navbar {
         display: flex;
-        justify-content: center;
-    }
-
-    .search-form {
-        flex-direction: row; /* 🧭 horizontal au lieu de colonne */
-        gap: 5px;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #3B7BBF;
+        padding: 38px 2px;
         width: 100%;
-        justify-content: center;
     }
 
-    .search-input {
-        width: 70%; /* s’adapte bien sans tout prendre */
+    .menu-toggle {
+    font-size: 1rem; /* ≈ 19px au lieu de 25px */
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
     }
 
-
-    .search-input {
-        width: 90%; /* s’adapte à l’écran */
+    .menu-toggle:hover {
+        color:#ddd;
     }
-
-    .search-form {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    /* Icônes utilisateur */
-    .user-icon {
-        margin-top: 10px;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-       gap: 15px;
-    }
-
-    .user-icon img {
-        margin-left: 0;
-    }
-
-    /* Menu catégories */
-    .categories {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 5px;
-        gap: 10px;
-    }
-
-    .filter-btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-        min-width: 150px;
-        white-space: nowrap;
-    }
-
-    /* Ajustements généraux */
-    .bloc-logo {
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .bloc-logo h1 {
-        margin-left: 0;
-    }
 }
