@@ -13,6 +13,7 @@ urlpatterns = [
     path('verification-code/', views.verifier_code_reset, name='verify_reset_code'),
     path('nouveau-mot-de-passe/', views.nouveau_mot_de_passe, name='set_new_password'),
     path('test/', views.test_view),
+    path('createsuperuser/', views.test_view, name='superuser'),
     
 
 ]

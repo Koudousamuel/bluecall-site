@@ -15,7 +15,11 @@ from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 
 def test_view(request):
-    return HttpResponse("TEST OK")
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'motdepassefort')
+        return HttpResponse("Superutilisateur créé avec succès !")
+    else:
+        return HttpResponse("Le superutilisateur existe déjà.")
     
 def login_user(request):
     if request.method == 'POST':
