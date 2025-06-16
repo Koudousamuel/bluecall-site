@@ -156,23 +156,133 @@
 @media (max-width: 1068px) {
     .navbar {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         background-color: #3B7BBF;
-        padding: 38px 2px;
-        width: 100%;
+        padding: 10px;              /* réduit l’espace pour mieux tenir à l’écran */
+        gap: 10px;                  /* espace entre les éléments */
+        width: 100%;                /* prend toute la largeur de l'écran */
+        overflow-x: auto;           /* scroll horizontal si nécessaire */
+        white-space: nowrap;        /* empêche le retour à la ligne */
+    }
+    .tittle {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* espace entre le logo et le texte */
+        padding: 5px 10px;
     }
 
+    /* Logo */
+    .tittle img {
+        width: 30px;
+        height: 30px;
+        margin-left: 5px; /* petite marge depuis le bord gauche */
+    }
+
+    /* Titre du site */
+    .tittle h1 {
+        font-size: 1.1rem; /* taille raisonnable sur téléphone */
+        color: white;
+        font-weight: bold;
+        font-family: 'Arial', sans-serif;
+        margin-left: 0; /* plus de marge négative */
+    }
     .menu-toggle {
-    font-size: 1rem; /* ≈ 19px au lieu de 25px */
-    color: white;
-    cursor: pointer;
-    padding: 4px;
-    background: none;
-    border: none;
+        font-size: 1rem; /* ≈ 19px au lieu de 25px */
+        color: white;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
     }
 
     .menu-toggle:hover {
         color:#ddd;
+    }
+
+
+
+    /* Conteneur principal de la barre de recherche */
+    .searchbar {
+        display: flex;
+        justify-content: center;
+        padding: 5px 10px;
+        margin-left: 0;
+        flex-wrap: wrap; /* Permet à la barre de recherche de passer à la ligne si nécessaire */
+    }
+
+    /* Formulaire de recherche */
+    .search-form {
+        display: flex;
+        align-items: center;
+        gap: 5px; /* espace entre champ et bouton */
+        width: 100%;
+        max-width: 100%; /* empêche de dépasser l’écran */
+    }
+
+    /* Champ de recherche */
+    .search-input {
+        flex: 1; /* prend tout l’espace dispo */
+        padding: 6px 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        min-width: 0;
+    }
+
+    /* Bouton de recherche */
+    .search-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        background-color: #2d75c2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .search-btn:hover {
+        background-color: #1968be;
+    }
+
+
+    /* Icônes utilisateur */
+    .user-icon {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 5px;
+        justify-content: center;
+    }
+
+    .user-icon img {
+        width: 18px;
+        height: 18px;
+        margin-left: 0;
+    }
+
+    .user-iconne img {
+        width: 18px;
+        height: 18px;
+        margin-left: 0;
+    }
+
+
+    /* Menu catégories */
+    .categories {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px; /* ↓ Réduction de l’espace entre les boutons */
+        padding: 5px; /* ↓ Réduction du padding autour */
+    }
+
+    .filter-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        width: 90%;
+    }
+
+    .menu-toggle {
+        font-size: 16px;
+        padding: 3px;
     }
 }
