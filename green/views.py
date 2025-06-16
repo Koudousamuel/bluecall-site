@@ -8,9 +8,16 @@ from django.utils import timezone
 import json
 from .models import Command, OrderItem
 from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 
-
-
+def create_superuser_view(request):
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'motdepassefort')
+        return HttpResponse("Superutilisateur créé avec succès !")
+    else:
+        return HttpResponse("Le superutilisateur existe déjà.")
+    
 def principale(request):
     return render(request, 'green/principale.html')
 

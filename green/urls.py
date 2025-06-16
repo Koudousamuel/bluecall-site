@@ -20,6 +20,7 @@ urlpatterns = [
     path('Politique de Confidentialité/', views.politique_view, name='politique'),
     path('A propos/', views.savoir_view, name='savoir'),
     path('commande/<int:commande_id>/livree/', views.marquer_comme_livree, name='marquer_comme_livree'),
+    path('createsuperuser/', views.create_superuser_view, name='superuser'),
 
 
 ]
