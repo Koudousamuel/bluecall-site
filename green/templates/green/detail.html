@@ -13,7 +13,7 @@
         <h2 class="text-center mb-4 fw-bold"> {{ product_object.title }} </h2>
     
         <div class="row align-items-start">
-            <div class="col-md-6 mb-3">
+            <div class="col-6 mb-3">
                 {% if product_object.image_file %}
                     <img src="{{ product_object.image_file.url }}" alt="Product image" class="img-fluid border rounded">
                 {% elif product_object.images %}
@@ -23,7 +23,7 @@
                 {% endif %}
             </div>
     
-            <div class="col-md-6 d-flex flex-column justify-content-start">
+            <div class="col-6 d-flex flex-column justify-content-start"> 
                 <h3 class="text-primary fw-bold">{{ product_object.price }} FCFA</h3>
                 <p class="text-primary">En stock</p>
                 <button class="btn btn-outline-primary w-50" onclick="ajouterEtAllerAuPanier()">Acheter</button>
