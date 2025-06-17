@@ -157,117 +157,79 @@
     .navbar {
         display: flex;
         align-items: center;
-        background-color: #3B7BBF;
-        padding: 30px;              /* réduit l’espace pour mieux tenir à l’écran */
-        gap: 8px;                  /* espace entre les éléments */
-        width: 119%;                /* prend toute la largeur de l'écran */
-        overflow-x: auto;           /* scroll horizontal si nécessaire */
-        white-space: nowrap;        /* empêche le retour à la ligne */
+        justify-content: space-between;
+        background-color: white;
+        padding: 10px 15px;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
     }
+
+    .menu-toggle {
+        font-size: 22px;
+        color: #000;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
     .tittle {
         display: flex;
         align-items: center;
-        gap: 10px; /* espace entre le logo et le texte */
-        padding: 2px 5px;
+        gap: 6px;
     }
 
-    /* Logo */
     .tittle img {
-        width: 7px;
-        height: 7px;
-        margin-left: 40px; /* petite marge depuis le bord gauche */
+        width: 80px; /* Taille du logo Jumia */
+        height: auto;
+        margin: 0;
     }
 
-    /* Titre du site */
-    .tittle h1 {
-        display: none;
-        font-size: 1rem; /* taille raisonnable sur téléphone */
-        color: white;
-        font-weight: bold;
-        font-family: 'Arial', sans-serif;
-        margin-left: 3; /* plus de marge négative */
-    }
-    .menu-toggle {
-        font-size: 0.7rem; /* ≈ 19px au lieu de 25px */
-        color: white;
-        cursor: pointer;
-        padding: 4px;
-        background: none;
-        border: none;
-    }
-
-    .menu-toggle:hover {
-        color:#ddd;
-    }
-
-
-
-    /* Conteneur principal de la barre de recherche */
     .searchbar {
         display: flex;
         justify-content: center;
-        padding: 3px 5px;
-        margin-left: 0;
-        flex-wrap: nowrap; /* ✅ Garde les éléments sur une seule ligne */
-        white-space: nowrap; /* (optionnel mais renforce l'effet) */
+        align-items: center;
+        flex-grow: 1;
+        padding: 0 10px;
     }
 
-    /* Formulaire de recherche */
     .search-form {
         display: flex;
         align-items: center;
-        gap: 1px;
-        width: auto;           /* ✅ Ne pas forcer 50% si tu veux éviter le retour à la ligne */
-        max-width: none;       /* ✅ Laisse le contenu décider */
-        white-space: nowrap;   /* ✅ Garde les enfants sur une ligne */
-    }
-
-    /* Champ de recherche */
-    .search-input {
-        width: 100px;            /* Fixe une largeur plus petite */
+        background-color: #f1f1f1;
+        border-radius: 25px;
         padding: 5px 10px;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.9rem;
+        width: 100%;
+        max-width: 500px;
     }
 
-    /* Bouton de recherche */
-    .search-btn {
-        padding: 3px 6px;
-        font-size: 0.9rem;
-        background-color: #2d75c2;
-        color: white;
+    .search-form input.search-input {
         border: none;
-        border-radius: 6px;
+        background: transparent;
+        padding: 6px 10px;
+        width: 100%;
+        font-size: 1rem;
+        outline: none;
+    }
+
+    .search-form button.search-btn {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #555;
         cursor: pointer;
     }
 
-    .search-btn:hover {
-        background-color: #1968be;
-    }
-
-
-    /* Icônes utilisateur */
     .user-icon {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-top: 5px;
-        justify-content: center;
+        gap: 12px;
     }
 
     .user-icon img {
-        width: 18px;
-        height: 18px;
-        margin-left: 0;
+        width: 22px;
+        height: 22px;
     }
-
-    .user-iconne img {
-        width: 18px;
-        height: 18px;
-        margin-left:0;
-    }
-
+}
 
     /* Menu catégories */
     .categories {
