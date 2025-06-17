@@ -158,9 +158,9 @@
         display: flex;
         align-items: center;
         background-color: #3B7BBF;
-        padding: 10px;              /* réduit l’espace pour mieux tenir à l’écran */
+        padding: 30px;              /* réduit l’espace pour mieux tenir à l’écran */
         gap: 8px;                  /* espace entre les éléments */
-        width: 160%;                /* prend toute la largeur de l'écran */
+        width: 112%;                /* prend toute la largeur de l'écran */
         overflow-x: auto;           /* scroll horizontal si nécessaire */
         white-space: nowrap;        /* empêche le retour à la ligne */
     }
