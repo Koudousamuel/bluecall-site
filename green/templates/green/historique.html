@@ -5,33 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historique des commandes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Pour éviter que le texte ou les lignes ne débordent */
+        .list-group-item {
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 576px) {
+            .badge {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-light p-4">
+<body class="bg-light p-3">
 
     <div class="container">
-        <h2 class="mb-4">Historique de vos commandes</h2>
+        <h2 class="mb-4 text-center">Historique de vos commandes</h2>
 
         {% if commandes %}
             <ul class="list-group">
                 {% for c in commandes %}
-                <li class="list-group-item mb-3">
-                    <strong>Commande n°{{ c.id }}</strong> - {{ c.date_command|date:"d/m/Y H:i" }}<br>
-                    Statut : {{ c.statut }}<br>
-                    Nom : {{ c.nom }}<br>
-                    Email : {{ c.email }}<br>
-                    Adresse : {{ c.address }}, {{ c.ville }} ({{ c.pays }})<br>
-                    Contact : {{ c.zipcode }}<br>
-                    Taille : {{ c.taille }}<br>
-                    Total : {{ c.total }} FCFA<br>
-                    
+                <li class="list-group-item mb-4">
+                    <div class="mb-2">
+                        <strong>Commande n°{{ c.id }}</strong> <br>
+                        <small class="text-muted">{{ c.date_command|date:"d/m/Y H:i" }}</small>
+                    </div>
+
+                    <p class="mb-1"><strong>Statut :</strong> {{ c.statut }}</p>
+                    <p class="mb-1"><strong>Nom :</strong> {{ c.nom }}</p>
+                    <p class="mb-1"><strong>Email :</strong> {{ c.email }}</p>
+                    <p class="mb-1"><strong>Adresse :</strong> {{ c.address }}, {{ c.ville }} ({{ c.pays }})</p>
+                    <p class="mb-1"><strong>Contact :</strong> {{ c.zipcode }}</p>
+                    <p class="mb-1"><strong>Taille :</strong> {{ c.taille }}</p>
+                    <p class="mb-2"><strong>Total :</strong> <span class="text-danger">{{ c.total }} FCFA</span></p>
 
                     <strong>Articles :</strong>
                     <ul class="list-group mt-2">
                         {% for item in c.items %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>{{ item.nom }}</span>
-                            <span class="badge bg-primary rounded-pill">Quantité : {{ item.quantite }}</span>
-                            <span class="badge bg-danger rounded-pill">Prix : {{ item.prix }} FCFA</span>
+                        <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start">
+                            <div class="mb-1 flex-grow-1">{{ item.nom }}</div>
+                            <div class="d-flex flex-column flex-sm-row gap-2">
+                                <span class="badge bg-primary">Quantité : {{ item.quantite }}</span>
+                                <span class="badge bg-danger">Prix : {{ item.prix }} FCFA</span>
+                            </div>
                         </li>
                         {% endfor %}
                     </ul>
@@ -39,10 +56,9 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p>Vous n'avez encore passé aucune commande.</p>
+            <p class="text-center">Vous n'avez encore passé aucune commande.</p>
         {% endif %}
     </div>
 
 </body>
 </html>
-
