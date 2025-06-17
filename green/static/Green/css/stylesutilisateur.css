@@ -160,7 +160,7 @@
         background-color: #3B7BBF;
         padding: 30px;              /* réduit l’espace pour mieux tenir à l’écran */
         gap: 8px;                  /* espace entre les éléments */
-        width: 112%;                /* prend toute la largeur de l'écran */
+        width: 119%;                /* prend toute la largeur de l'écran */
         overflow-x: auto;           /* scroll horizontal si nécessaire */
         white-space: nowrap;        /* empêche le retour à la ligne */
     }
@@ -175,11 +175,12 @@
     .tittle img {
         width: 7px;
         height: 7px;
-        margin-left: 20px; /* petite marge depuis le bord gauche */
+        margin-left: 40px; /* petite marge depuis le bord gauche */
     }
 
     /* Titre du site */
     .tittle h1 {
+        display: none;
         font-size: 1rem; /* taille raisonnable sur téléphone */
         color: white;
         font-weight: bold;
@@ -274,6 +275,7 @@
         overflow-x: auto;
         padding: 5px;
         gap: 10px;
+        width: 119%; 
     }
 
     .filter-btn {
