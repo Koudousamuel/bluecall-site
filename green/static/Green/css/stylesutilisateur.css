@@ -155,64 +155,86 @@
 /* Responsive : Garde le style PC mais ajuste proprement sur téléphone */
 @media (max-width: 1068px) {
     .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #3B7BBF;
-        padding: 38px 2px;
+        flex-direction: column;
+        align-items: stretch;
         padding: 10px 15px;
-        width: 110%;
+        background-color: white;
         border-bottom: 1px solid #ddd;
     }
 
-    .menu-toggle {
-        font-size: 22px;
-        color: #000;
-        background: none;
-        border: none;
-        cursor: pointer;
+    .navbar > .top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
     }
 
-    .tittle {
+    .navbar-toggler {
+        border: none;
+        background: none;
+        font-size: 1.5rem;
+        color: #000;
+    }
+
+    .bloc-logo {
         display: flex;
         align-items: center;
         gap: 6px;
     }
 
-    .tittle img {
-        width: 80px; /* Taille du logo Jumia */
-        height: auto;
+    .bloc-logo img {
+        height: 30px;
+    }
+
+    .bloc-logo h1 {
+        font-size: 1rem;
         margin: 0;
+        white-space: nowrap;
+    }
+
+    .user-iconne {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-iconne img {
+        height: 24px;
+        width: 24px;
+    }
+
+    .btn-group {
+        display: flex;
+        align-items: center;
     }
 
     .searchbar {
+        margin-top: 10px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        flex-grow: 1;
-        padding: 0 10px;
+        width: 100%;
     }
 
     .search-form {
         display: flex;
         align-items: center;
         background-color: #f1f1f1;
-        border-radius: 25px;
-        padding: 5px 10px;
+        border-radius: 20px;
+        padding: 4px 10px;
         width: 100%;
         max-width: 500px;
     }
 
-    .search-form input.search-input {
+    .search-input {
         border: none;
         background: transparent;
-        padding: 6px 10px;
-        width: 100%;
-        font-size: 1rem;
+        padding: 6px 8px;
+        font-size: 0.9rem;
+        flex: 1;
         outline: none;
     }
 
-    .search-form button.search-btn {
+    .search-btn {
         background: none;
         border: none;
         font-size: 1.2rem;
@@ -220,26 +242,7 @@
         cursor: pointer;
     }
 
-    .user-icon {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
 
-    .user-icon img {
-        width: 22px;
-        height: 22px;
-    }
-
-
-    /* Menu catégories */
-    .categories {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 5px;
-        gap: 10px;
-        width: 119%; 
-    }
 
     .filter-btn {
         padding: 10px 20px;
