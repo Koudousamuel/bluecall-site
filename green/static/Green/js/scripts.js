@@ -18,9 +18,9 @@ function filtrerProduits(categorie) {
             } else {
                 data.forEach(product => {
                     container.append(`
-                        <div class="col-3 col-sm-3 col-md-2 mb-2">
+                        <div class="col-4 col-sm-4 col-md-2 mb-2">
                             <div class="card h-100">
-                                <img src="${product.image_url}" alt="" class="card-img-top" style="height: 180px; object-fit: cover;">
+                                <img src="${product.image_url}" alt="" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body p-2">
                                     <div class="card-title text-truncate" id="aa${product.id}" title="${product.title}">
                                         ${product.title}
