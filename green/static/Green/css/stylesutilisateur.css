@@ -158,8 +158,8 @@
         display: flex;
         align-items: center;
         background-color: #3B7BBF;
-        padding: 10px;              /* réduit l’espace pour mieux tenir à l’écran */
-        gap: 10px;                  /* espace entre les éléments */
+        padding: 10px 20px;              /* réduit l’espace pour mieux tenir à l’écran */
+        gap: 8px;                  /* espace entre les éléments */
         width: 100%;                /* prend toute la largeur de l'écran */
         overflow-x: auto;           /* scroll horizontal si nécessaire */
         white-space: nowrap;        /* empêche le retour à la ligne */
@@ -180,7 +180,7 @@
 
     /* Titre du site */
     .tittle h1 {
-        font-size: 0.2rem; /* taille raisonnable sur téléphone */
+        font-size: 1rem; /* taille raisonnable sur téléphone */
         color: white;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
