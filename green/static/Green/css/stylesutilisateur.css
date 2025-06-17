@@ -158,7 +158,7 @@
         flex-direction: column;
         align-items: stretch;
         padding: 10px 15px;
-        background-color: white;
+        background-color: #3B7BBF;
         border-bottom: 1px solid #ddd;
     }
 
@@ -242,6 +242,13 @@
         cursor: pointer;
     }
 
+
+    .categories {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px;
+        gap: 10px;
+    }
 
 
     .filter-btn {
