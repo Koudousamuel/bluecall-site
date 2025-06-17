@@ -107,25 +107,28 @@
   {% block scripts %}{% endblock %}
 </body>
 
-<footer class="footer mt-5 p-4" style="background-color: #001f3f; color: white;">
-
+<footer class="footer mt-5 p-4 text-white" style="background-color: #001f3f;">
     {% block footer %}
-        <h5>✅ Bon à savoir</h5>
-        <p>Les produits présentés sur notre site peuvent être personnalisés selon vos préférences.
+    <div class="container">
+        <h5 class="fw-bold">✅ Bon à savoir</h5>
+        <p class="mb-4">
+            Les produits présentés sur notre site peuvent être personnalisés selon vos préférences.
             Vous avez repéré un article mais vous le souhaitez dans une autre couleur ou avec une petite variante ?
-            Pas de souci ! Il vous suffit de passer commande normalement et de préciser votre demande lors de l’appel de confirmation avec notre service client.
-            <br>Nous mettrons tout en œuvre pour répondre à vos envies et vous proposer une solution adaptée. Pour plus d'information sur la fonctionnement du site cliquer sur les informations en bas, Merci.</p>
-    {% endblock %}
+            Pas de souci ! Il vous suffit de passer commande normalement et de préciser votre demande lors de l’appel de confirmation avec notre service client.<br>
+            Nous mettrons tout en œuvre pour répondre à vos envies et vous proposer une solution adaptée.
+            Pour plus d'information sur le fonctionnement du site, cliquez sur les liens en bas. Merci.
+        </p>
 
-
-    <div class="mt-4 border-top pt-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <p class="mb-0">&copy; 2025 Blue-Call. Tous droits réservés.</p>
-      <div>
-        <a href="{% url 'green:savoir' %}" class="text-white text-decoration-underline me-3">Qui sommes-nous ?</a>
-        <a href="{% url 'green:condition' %}" class="text-white text-decoration-underline me-3">Conditions d’utilisation</a>
-        <a href="{% url 'green:politique' %}" class="text-white text-decoration-underline">Politique de confidentialité</a>
-      </div>
+        <div class="border-top pt-3 d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+            <p class="mb-2 mb-md-0">&copy; 2025 Blue-Call. Tous droits réservés.</p>
+            <div>
+                <a href="{% url 'green:savoir' %}" class="text-white text-decoration-underline d-block d-md-inline mb-1 mb-md-0 me-md-3">Qui sommes-nous ?</a>
+                <a href="{% url 'green:condition' %}" class="text-white text-decoration-underline d-block d-md-inline mb-1 mb-md-0 me-md-3">Conditions d’utilisation</a>
+                <a href="{% url 'green:politique' %}" class="text-white text-decoration-underline d-block d-md-inline">Politique de confidentialité</a>
+            </div>
+        </div>
     </div>
+    {% endblock %}
 </footer>
 
 </html>
