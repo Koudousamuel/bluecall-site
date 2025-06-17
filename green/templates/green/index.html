@@ -12,7 +12,7 @@
 <!-- Affichage initial côté serveur -->
 <div id="produits-container" class="row mt-2 g-2">
     {% for product in product_object %}
-    <div class="col-md-2">
+    <div class="col-3 col-sm-3 col-md-2 mb-2">
         <div class="card">
             <img src="{{ product.get_image }}" alt="" class="card-img-top" height="280">
             <div class="card-body">
