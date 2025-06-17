@@ -2,106 +2,130 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commande - BlueCall</title>
-    <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande - BlueCall</title>
+  <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'Green/js/scripts.js' %}"></script>
+  <style>
+    /* Ajustement pour une bonne lisibilité mobile */
+    .form-group {
+      margin-bottom: 1rem;
+    }
 
-    <!-- ✅ Charge jQuery AVANT ton script JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'Green/js/scripts.js' %}"></script>
+    #item_list .list-group-item {
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 576px) {
+      input, select {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
-<body>
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="text-center">Passez votre commande !</h3>
-            <ul class="list-group" id="item_list">
-                <!-- Les éléments du panier seront injectés ici par JS -->
-            </ul>
-        </div>
+<body class="bg-light p-3">
+
+  <div class="container">
+    <h3 class="text-center mb-4">Passez votre commande !</h3>
+
+    <!-- Panier -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <ul class="list-group" id="item_list">
+          <!-- Les éléments du panier seront injectés ici par JS -->
+        </ul>
+      </div>
     </div>
 
+    <!-- Formulaire -->
     <div class="row">
-        <div class="col-md-12">
-          <form method="post">
-            {% csrf_token %}
-            <input type="hidden" id="items" name="items">
-      
-            <!-- Ligne 1 : Nom et Email -->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="nom">Nom et Prénoms</label>
-                  <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom et Prénoms", value="{{ user.last_name }}">>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" name="email" id="email" class="form-control" placeholder="Email",  value="{{ user.email }}">
-                </div>
+      <div class="col-12">
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" id="items" name="items">
+
+          <div class="row">
+            <!-- Nom -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nom">Nom et Prénoms</label>
+                <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom et Prénoms" value="{{ user.last_name }}">
               </div>
             </div>
-      
-            <!-- Ligne 2 : Adresse -->
-            <div class="form-group">
-              <label for="address">Adresse</label>
-              <input type="text" name="address" id="address" class="form-control" placeholder="1234 Main St">
-            </div>
-      
-            <!-- Ligne 3 : Ville, Pays, Contact, Date de commande -->
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="ville">Ville</label>
-                  <input type="text" name="ville" id="ville" class="form-control" placeholder="Abidjan", value="{{ user.city }}">
-                </div>
+
+            <!-- Email -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ user.email }}">
               </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="pays">Pays</label>
-                  <select id="pays" name="pays" class="form-control",>
-                    <option selected>Côte D'Ivoire</option>
-                    <option>...</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="zipcode">Contact</label>
-                  <input name="zipcode" id="zipcode" type="text" class="form-control" placeholder="+225-0701010101">
-                </div>
-                <label for="total" class="form-label fw-bold">Total à payer :</label>
-                <input type="text" id="total" name="total" class="form-control fw-bold" value="0 FCFA" readonly
-                  style="
-                    background-color: #f1f1f1;
-                    border: none;
-                    width: 100%;
-                    font-size: 1.3rem;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  ">
-                
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                    <label for="taille">Taille</label>  <!-- Nouveau champ Taille -->
-                    <input name="taille" id="taille" type="text" class="form-control" placeholder="Votre taille, pointure" required>
-                </div>
             </div>
           </div>
-      
-            <!-- Bouton -->
-            <button type="submit" class="btn btn-primary">Commander</button>
-          </form>
-        </div>
-      </div>
-      
 
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
+          <!-- Adresse -->
+          <div class="form-group">
+            <label for="address">Adresse</label>
+            <input type="text" name="address" id="address" class="form-control" placeholder="1234 Main St">
+          </div>
+
+          <!-- Ville, Pays, Contact, Taille -->
+          <div class="row">
+            <!-- Ville -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="ville">Ville</label>
+                <input type="text" name="ville" id="ville" class="form-control" placeholder="Abidjan" value="{{ user.city }}">
+              </div>
+            </div>
+
+            <!-- Pays -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="pays">Pays</label>
+                <select id="pays" name="pays" class="form-control">
+                  <option selected>Côte D'Ivoire</option>
+                  <option>...</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="zipcode">Contact</label>
+                <input name="zipcode" id="zipcode" type="text" class="form-control" placeholder="+225-0701010101">
+              </div>
+
+              <div class="form-group mt-2">
+                <label for="total" class="form-label fw-bold">Total à payer :</label>
+                <input type="text" id="total" name="total" class="form-control fw-bold" value="0 FCFA" readonly
+                  style="background-color: #f1f1f1; border: none; font-size: 1.3rem;">
+              </div>
+            </div>
+
+            <!-- Taille -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="taille">Taille</label>
+                <input name="taille" id="taille" type="text" class="form-control" placeholder="Votre taille, pointure" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bouton -->
+          <div class="d-grid gap-2 mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">Commander</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+ document.addEventListener('DOMContentLoaded', function () {
         let panier = localStorage.getItem('panier');
         if (panier) {
             panier = JSON.parse(panier);
