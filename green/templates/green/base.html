@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title translate="no">Blue-Call</title>
     <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Green/css/stylesutilisateur.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -35,13 +36,13 @@
               <!-- Barre de recherche -->
               <nav class="searchbar">
                   <form class="search-form d-flex">
-                      <input class="search-input form-control me-2" type="search" name="item-name" placeholder="Rechercher" aria-label="Search">
-                      <button class="search-btn btn-primary" type="submit">Rechercher</button>
+                    <input class="search-input form-control me-2" type="search" name="item-name" placeholder="Rechercher" aria-label="Search">
+                    <button class="search-btn btn-primary" type="submit">🔍</button>
                   </form>
               </nav>
           
               <!-- Panier -->
-              <div class="btn-group dropup me-2">
+              <div class="btn-group dropup me-1">
                   <button id="panier" type="button" class="btn btn-secondary" data-html="true" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom eeeeeeh">
                       Voir (0)
                   </button>

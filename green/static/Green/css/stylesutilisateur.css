@@ -173,21 +173,21 @@
 
     /* Logo */
     .tittle img {
-        width: 10px;
-        height: 10px;
+        width: 7px;
+        height: 7px;
         margin-left: 5px; /* petite marge depuis le bord gauche */
     }
 
     /* Titre du site */
     .tittle h1 {
-        font-size: 1rem; /* taille raisonnable sur téléphone */
+        font-size: 0.4rem; /* taille raisonnable sur téléphone */
         color: white;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
         margin-left: 0; /* plus de marge négative */
     }
     .menu-toggle {
-        font-size: 1rem; /* ≈ 19px au lieu de 25px */
+        font-size: 0.7rem; /* ≈ 19px au lieu de 25px */
         color: white;
         cursor: pointer;
         padding: 4px;
@@ -266,25 +266,18 @@
     }
 
 
+    /* Menu catégories */
     .categories {
-        display: flex;
-        flex-direction: row !important;  /* Force bien l'horizontale */
-        overflow-x: auto;                 /* Scroll horizontal si besoin */
-        white-space: nowrap;
-        gap: 6px;                         /* Moins d’espace entre les boutons */
-        padding: 5px 10px;
- 
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px;
+        gap: 10px;
     }
 
-.categories::-webkit-scrollbar {
-    display: none;
-}
-
-.filter-btn {
-    flex-shrink: 0;
-    padding: 6px 12px;
-    font-size: 13px;
-    border-radius: 20px;
-    white-space: nowrap;
-}
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: 150px;
+        white-space:nowrap;
+    }
 }
