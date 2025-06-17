@@ -158,9 +158,9 @@
         display: flex;
         align-items: center;
         background-color: #3B7BBF;
-        padding: 10px 20px;              /* réduit l’espace pour mieux tenir à l’écran */
+        padding: 10px;              /* réduit l’espace pour mieux tenir à l’écran */
         gap: 8px;                  /* espace entre les éléments */
-        width: 100%;                /* prend toute la largeur de l'écran */
+        width: 160%;                /* prend toute la largeur de l'écran */
         overflow-x: auto;           /* scroll horizontal si nécessaire */
         white-space: nowrap;        /* empêche le retour à la ligne */
     }
@@ -175,7 +175,7 @@
     .tittle img {
         width: 7px;
         height: 7px;
-        margin-left: 10px; /* petite marge depuis le bord gauche */
+        margin-left: 20px; /* petite marge depuis le bord gauche */
     }
 
     /* Titre du site */
@@ -184,7 +184,7 @@
         color: white;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
-        margin-left: 0; /* plus de marge négative */
+        margin-left: 3; /* plus de marge négative */
     }
     .menu-toggle {
         font-size: 0.7rem; /* ≈ 19px au lieu de 25px */
