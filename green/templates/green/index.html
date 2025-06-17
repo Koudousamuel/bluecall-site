@@ -12,7 +12,8 @@
 <!-- Affichage initial côté serveur -->
 <div id="produits-container" class="row mt-2 g-2">
     {% for product in product_object %}
-    <div class="card h-100">
+    <div class="col-4 col-sm-4 col-md-2">
+      <div class="card h-100">
         <img src="{{ product.get_image }}" alt="" class="card-img-top" style="height: 150px; object-fit: cover;">
         <div class="card-body p-2">
             <div id="aa{{ product.id }}" class="card-title text-truncate" title="{{ product.title }}">{{ product.title }}</div>
@@ -28,6 +29,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
     {% endfor %}
 </div>
