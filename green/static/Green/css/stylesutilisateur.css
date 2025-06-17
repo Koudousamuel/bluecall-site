@@ -175,12 +175,12 @@
     .tittle img {
         width: 7px;
         height: 7px;
-        margin-left: 5px; /* petite marge depuis le bord gauche */
+        margin-left: 10px; /* petite marge depuis le bord gauche */
     }
 
     /* Titre du site */
     .tittle h1 {
-        font-size: 0.4rem; /* taille raisonnable sur téléphone */
+        font-size: 0.2rem; /* taille raisonnable sur téléphone */
         color: white;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
@@ -206,17 +206,19 @@
         display: flex;
         justify-content: center;
         padding: 3px 5px;
-        margin-left: 3;
-        flex-wrap: wrap; /* Permet à la barre de recherche de passer à la ligne si nécessaire */
+        margin-left: 0;
+        flex-wrap: nowrap; /* ✅ Garde les éléments sur une seule ligne */
+        white-space: nowrap; /* (optionnel mais renforce l'effet) */
     }
 
     /* Formulaire de recherche */
     .search-form {
         display: flex;
         align-items: center;
-        gap: 1px; /* espace entre champ et bouton */
-        width: 50%;
-        max-width: 50%; /* empêche de dépasser l’écran */
+        gap: 1px;
+        width: auto;           /* ✅ Ne pas forcer 50% si tu veux éviter le retour à la ligne */
+        max-width: none;       /* ✅ Laisse le contenu décider */
+        white-space: nowrap;   /* ✅ Garde les enfants sur une ligne */
     }
 
     /* Champ de recherche */
