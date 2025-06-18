@@ -9,41 +9,45 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5 p-4 bg-light rounded">
-        <h2 class="text-center mb-4 fw-bold"> {{ product_object.title }} </h2>
-    
-        <div class="row align-items-start">
-            <div class="col-6 mb-3">
-                {% if product_object.image_file %}
-                    <img src="{{ product_object.image_file.url }}" alt="Product image" class="img-fluid border rounded">
-                {% elif product_object.images %}
-                    <img src="{{ product_object.images }}" alt="Product image" class="img-fluid border rounded">
-                {% else %}
-                    <p>Aucune image disponible</p>
-                {% endif %}
-            </div>
-    
-            <div class="col-6 d-flex flex-column justify-content-start"> 
-                <h3 class="text-primary fw-bold">{{ product_object.price }} FCFA</h3>
-                <p class="text-primary">En stock</p>
-                <button class="btn btn-outline-primary w-50" onclick="ajouterEtAllerAuPanier()">Acheter</button>
-            </div>
+    <div class="container mt-5 p-4 bg-light rounded"> 
+    <h2 class="text-center mb-4 fw-bold"> {{ product_object.title }} </h2>
+
+    <div class="row align-items-start">
+        <div class="col-12 col-md-6 mb-3">
+            {% if product_object.image_file %}
+                <img src="{{ product_object.image_file.url }}" alt="Product image" 
+                     class="img-fluid border rounded"
+                     style="width: 100%; height: auto;">
+            {% elif product_object.images %}
+                <img src="{{ product_object.images }}" alt="Product image" 
+                     class="img-fluid border rounded"
+                     style="width: 100%; height: auto;">
+            {% else %}
+                <p>Aucune image disponible</p>
+            {% endif %}
         </div>
-    
-        <hr>
-    
-        <div class="mt-4">
-            <h4>Description</h4>
-            <p>{{ product_object.description }}</p>
-        </div>
-    
-        <div class="mt-4">
-            <h5>Informations supplémentaires</h5>
-            <ul>
-                <li>Contacte Whatsapp: +225-07-97-14-50-38</li>
-            </ul>
+
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-start align-items-start">
+            <h3 class="text-primary fw-bold" style="font-size: 1.2rem;">{{ product_object.price }} FCFA</h3>
+            <p class="text-primary" style="font-size: 0.95rem;">En stock</p>
+            <button class="btn btn-outline-primary w-75" style="font-size: 0.95rem;" onclick="ajouterEtAllerAuPanier()">Acheter</button>
         </div>
     </div>
+
+    <hr>
+
+    <div class="mt-4">
+        <h4>Description</h4>
+        <p>{{ product_object.description }}</p>
+    </div>
+
+    <div class="mt-4">
+        <h5>Informations supplémentaires</h5>
+        <ul>
+            <li>Contacte Whatsapp: +225-07-97-14-50-38</li>
+        </ul>
+    </div>
+</div>
 
     <!-- Script JavaScript pour ajouter au panier et rediriger -->
     <script>
