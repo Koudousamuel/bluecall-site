@@ -148,11 +148,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.elasticemail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'koudouclaudesamuel17@gmail.com'  # Ton email
-EMAIL_HOST_PASSWORD = 'gfdg gsyr xzdr usvj'  # Celui que tu viens de copier
+EMAIL_HOST_USER = 'bluecall57@gmail.com'  # Ton email
+EMAIL_HOST_PASSWORD = '980A5617AF2B6F6502C53642F01FE100F6ED'  # Celui que tu viens de copier
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 

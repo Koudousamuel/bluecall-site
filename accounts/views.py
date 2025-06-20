@@ -46,7 +46,7 @@ def envoyer_email(email):
         send_mail(
             subject='Votre code de vérification',
             message=f'Voici votre code de vérification : {code}',
-            from_email='koudouclaudesamuel17@gmail.com',
+            from_email='bluecall57@gmail.com',
             recipient_list=[email],
             fail_silently=False,
         )
