@@ -148,12 +148,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.elasticemail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bluecall57@gmail.com'  # Ton email
-EMAIL_HOST_PASSWORD = '980A5617AF2B6F6502C53642F01FE100F6ED'  # Celui que tu viens de copier
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = 'oazd ajti itaf kswy'  # Celui que tu viens de copier
 
 
 
@@ -165,3 +164,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SESSION_COOKIE_AGE = 86400  # ou autre durée
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_SAVE_EVERY_REQUEST = True
+
+
+
+CSRF_FAILURE_VIEW = 'accounts.views.custom_csrf_failure_view'

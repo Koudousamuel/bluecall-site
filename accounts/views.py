@@ -6,6 +6,7 @@ from .forms import CustomUserCreationForm
 from django.core.mail import send_mail
 from django.http import HttpResponse
 import random
+import resend
 from django.contrib.auth.models import User
 from .forms import PasswordResetRequestForm
 from .forms import NouveauMotDePasseForm
@@ -64,7 +65,7 @@ def register_user(request):
             user = form.save()  # Enregistre l'utilisateur
             email = user.email  # Récupère l'email de l'utilisateur
             
-            # Envoie un e-mail avec un code de vérification
+            #Envoie un e-mail avec un code de vérification
             verification_code = envoyer_email(email)
 
             # Enregistrer le code de vérification en session (ou en base de données si tu préfères)
@@ -176,3 +177,32 @@ def nouveau_mot_de_passe(request):
                 messages.error(request, "Utilisateur introuvable.")
     
     return render(request, "accounts/set_new_password.html")
+
+def custom_csrf_failure_view(request, reason=""):
+    return render(request, "accounts/csrf_failure.html", {"reason": reason}, status=403)
+
+
+def resend_verification_code(request):
+    email = request.session.get("email_to_verify")
+
+    if not email:
+        messages.error(request, "Aucune adresse email trouvée. Veuillez recommencer l'inscription.")
+        return redirect("accounts:register")
+
+    # Générer un nouveau code
+    code = str(random.randint(100000, 999999))
+    request.session["verification_code"] = code
+
+    try:
+        send_mail(
+            subject="Nouveau code de vérification",
+            message=f"Voici votre nouveau code : {code}",
+            from_email="noreply@bluecall.resend.dev",  # ou Elastic Email
+            recipient_list=[email],
+            fail_silently=False,
+        )
+        messages.success(request, "Un nouveau code a été envoyé à votre adresse e-mail.")
+    except Exception as e:
+        messages.error(request, f"Erreur d'envoi : {e}")
+
+    return redirect("accounts:verify_email")
