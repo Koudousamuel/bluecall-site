@@ -1,24 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone  
-
+from django.utils import timezone
+from cloudinary.models import CloudinaryField  # <-- Ajouté
 
 # Create your models here.
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    image_file = models.ImageField(upload_to='categories/', blank=True, null=True)  # <-- Ajouté ici
+    image_file = CloudinaryField('image', blank=True, null=True)  # <-- Modifié ici
     date_added = models.DateField(auto_now=True)
+
     class Meta:
         ordering = ['-date_added']
 
     def __str__(self):
         return self.name
-    
+
     def get_image(self):
         if self.image_file:
-            return self.image_file.url  # image locale si elle existe
+            return self.image_file.url
         return None
+
 
 class Product(models.Model):
     title = models.CharField(max_length=200)
@@ -26,19 +28,21 @@ class Product(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category, related_name='categorie', on_delete=models.CASCADE)
     images = models.CharField(max_length=5000, blank=True, null=True)
-    image_file = models.ImageField(upload_to='products/', blank=True, null=True)  # image locale
+    image_file = CloudinaryField('image', blank=True, null=True)  # <-- Modifié ici
     date_added = models.DateTimeField(auto_now=True)
+
     class Meta:
         ordering = ['-date_added']
 
     def __str__(self):
         return self.title
-    
+    @property
     def get_image(self):
         if self.image_file:
-            return self.image_file.url  # image locale si elle existe
-        return self.images 
-    
+            return self.image_file.url
+        return self.images
+
+
 class Command(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     items = models.CharField(max_length=300)
@@ -57,13 +61,14 @@ class Command(models.Model):
         return f"Commande {self.id} - {self.nom}"
 
     def get_products(self):
-        return self.orderitem_set.all() 
-    
+        return self.orderitem_set.all()
+
+
 class OrderItem(models.Model):
     command = models.ForeignKey(Command, on_delete=models.CASCADE)
     product_nom = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()  # Quantité du produit commandé
-    price = models.FloatField()  # Prix du produit au moment de la commande
+    quantity = models.PositiveIntegerField()
+    price = models.FloatField()
 
     def __str__(self):
-        return f"{self.product.title} x{self.quantity}"
+        return f"{self.product_nom.title} x{self.quantity}"

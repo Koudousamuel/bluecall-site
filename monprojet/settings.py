@@ -17,6 +17,8 @@ import cloudinary.uploader
 import cloudinary.api
 import os
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
@@ -37,6 +39,22 @@ ALLOWED_HOSTS = ['bluecall-site.onrender.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
+cloudinary.config(
+    cloud_name='dbrffqezo',
+    api_key='428191512625686',
+    api_secret='fpB7xyE4HMS0ZfyjHuD9IRyYpvI',
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dbrffqezo',
+    'API_KEY': '428191512625686',
+    'API_SECRET': 'fpB7xyE4HMS0ZfyjHuD9IRyYpvI'
+}
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,13 +68,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 ]
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'mediaflows_0e282d9c-8420-488b-9cec-e59b3a5decd6',
-    'API_KEY': '421411498112542',
-    'API_SECRET': '0Yf9ULt43dxtZ4Tn8NVz1fLBC3g'
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
