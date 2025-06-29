@@ -156,11 +156,6 @@ EMAIL_HOST_PASSWORD = 'oazd ajti itaf kswy'  # Celui que tu viens de copier
 
 
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
 SESSION_COOKIE_AGE = 86400  # ou autre durée
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_SAVE_EVERY_REQUEST = True
