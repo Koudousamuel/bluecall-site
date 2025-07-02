@@ -13,13 +13,14 @@ urlpatterns = [
     path('profil/', views.profil, name='profil'),
     path('Maillots/', views.maillot, name='maillot'),
     path('Vetements-Femmes/', views.FemmeVet , name='femmevet'),
-     path('Sacs-Homme/', views.sacs , name='sacs'),
+    path('Sacs-Homme/', views.sacs , name='sacs'),
     path('Historique/', views.Historique , name='historique'),
     path('confirmation/', views.confirmation_view, name='confirmation'),
     path('Conditions Générales/', views.condition_view, name='condition'),
     path('Politique de Confidentialité/', views.politique_view, name='politique'),
     path('A propos/', views.savoir_view, name='savoir'),
     path('commande/<int:commande_id>/livree/', views.marquer_comme_livree, name='marquer_comme_livree'),
-
+    path("payer/<int:commande_id>/", views.paytech_payment, name="paytech_payment"),
+    path("api/paytech/notify/", views.paytech_notify, name="paytech_notify"),
 
 ]

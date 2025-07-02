@@ -28,7 +28,7 @@ def marquer_comme_livree(modeladmin, request, queryset):
     queryset.update(statut='livrée')
 
 class AdminCommand(admin.ModelAdmin):
-    list_display = ('items', 'total', 'nom', 'address', 'email', 'ville', 'pays', 'zipcode', 'date_command', 'taille', 'statut')
+    list_display = ('items', 'total', 'nom', 'address', 'email', 'ville', 'pays', 'zipcode', 'date_command', 'taille', 'statut', 'transaction_id','paye')
     actions = [marquer_comme_livree]  # Ajouter l'action de mise à jour du statut
 
 # Enregistrement des modèles dans l'admin

@@ -57,6 +57,9 @@ class Command(models.Model):
     statut = models.CharField(max_length=100, default='livraison en cours')
     date_command = models.DateTimeField(default=timezone.now)
 
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    paye = models.BooleanField(default=False)  # Ce
+
     def __str__(self):
         return f"Commande {self.id} - {self.nom}"
 
@@ -72,3 +75,4 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product_nom.title} x{self.quantity}"
+    

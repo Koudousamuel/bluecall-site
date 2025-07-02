@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historique des commandes</title>
+    <link rel="icon" href="{% static 'Green/images/favicon.png' %}" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Pour éviter que le texte ou les lignes ne débordent */
@@ -33,6 +35,15 @@
                     </div>
 
                     <p class="mb-1"><strong>Statut :</strong> {{ c.statut }}</p>
+                    <p class="mb-1">
+                    <strong>Livraison :</strong>
+                    {% if c.paye %}
+                        <span class="badge bg-success">Payée</span>
+                     {% else %}
+                        <span class="badge bg-danger">Impayée</span>
+                    {% endif %}
+                    </p>
+
                     <p class="mb-1"><strong>Nom :</strong> {{ c.nom }}</p>
                     <p class="mb-1"><strong>Email :</strong> {{ c.email }}</p>
                     <p class="mb-1"><strong>Adresse :</strong> {{ c.address }}, {{ c.ville }} ({{ c.pays }})</p>
