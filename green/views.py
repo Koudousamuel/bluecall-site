@@ -104,7 +104,7 @@ def panier_view(request):
         com.save()
 
         # Rediriger vers le paiement CinetPay avec l'ID de la commande
-        return redirect('green:cinetpay_payment', commande_id=com.id)
+        return redirect('green:paytech_payment', commande_id=com.id)
 
     return render(request, 'green/panier.html', {'user': user})
 
@@ -182,14 +182,6 @@ def politique_view(request):
 def savoir_view(request):
     return render(request, 'green/savoir.html')
 
-
-import uuid
-import requests
-from django.conf import settings
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from .models import Command
 
 
 @login_required(login_url='green:home')
