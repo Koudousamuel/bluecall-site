@@ -207,6 +207,13 @@ def paytech_payment(request, commande_id):
             "email": commande.email,
             "phone_number": commande.zipcode
         },
+        "items": [
+            {
+                "item_name": "Frais de livraison",
+                "item_price": montant,
+                "item_quantity": 1
+            }
+        ],
         "custom_data": {
             "commande_id": commande.id
         }
