@@ -188,7 +188,7 @@ def savoir_view(request):
 def paytech_payment(request, commande_id):
     commande = get_object_or_404(Command, id=commande_id)
 
-    montant = 2000  # ✅ Seulement les frais de livraison
+    montant = int(2000)  # ✅ Seulement les frais de livraison
 
     transaction_id = str(uuid.uuid4())
     commande.transaction_id = transaction_id
