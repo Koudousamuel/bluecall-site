@@ -178,9 +178,8 @@ CSRF_FAILURE_VIEW = 'accounts.views.custom_csrf_failure_view'
 
 # settings.py
 
-PAYTECH_API_KEY = "7bdb5413eaad75980347885d0197ab7507a57ebfbfbffea9ee60ba04b3ce3d32"
-PAYTECH_SECRET_KEY = "6163bcd68ff0cb39e440b9c996efc913670bcd7b6eef0654eef6d4510b179bc2"
-PAYTECH_NOTIFY_URL = "https://bluecall-site.onrender.com/api/paytech/notify/"
-PAYTECH_RETURN_URL = "https://bluecall-site.onrender.com/confirmation/"
-PAYTECH_CANCEL_URL = "https://bluecall-site.onrender.com/paiement/cancel/"
+CINETPAY_SITE_ID = '105900199'
+CINETPAY_API_KEY = '4437493986862db5847de80.28582446'
+CINETPAY_NOTIFY_URL = 'https://bluecall-site.onrender.com/notify/'   # Tu peux mettre temporairement https://bluecall-site.onrender.com/notify/
+CINETPAY_RETURN_URL = 'https://bluecall-site.onrender.com/green/confirmation/'    # Page de retour après paiement
 

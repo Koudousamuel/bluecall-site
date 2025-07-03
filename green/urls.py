@@ -20,7 +20,7 @@ urlpatterns = [
     path('Politique de Confidentialité/', views.politique_view, name='politique'),
     path('A propos/', views.savoir_view, name='savoir'),
     path('commande/<int:commande_id>/livree/', views.marquer_comme_livree, name='marquer_comme_livree'),
-    path("payer/<int:commande_id>/", views.paytech_payment, name="paytech_payment"),
-    path("api/paytech/notify/", views.paytech_notify, name="paytech_notify"),
+    path("payer-cinetpay/<int:commande_id>/", views.cinetpay_payment, name="cinetpay_payment"),
+    path("api/cinetpay/notify/", views.notify, name="cinetpay_notify"),  # Si ce n'est pas déjà présent
 
 ]
