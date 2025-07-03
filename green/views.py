@@ -10,19 +10,9 @@ from .models import Command, OrderItem
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-import uuid
-import requests
-from django.conf import settings
-from django.shortcuts import redirect
-from django.http import HttpResponse
-import json
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponse
-from .models import Command
-import pprint
 
 
-
+    
 def principale(request):
     return render(request, 'green/principale.html')
 
@@ -72,17 +62,15 @@ def detail(request, myid):
     return render(request, 'green/detail.html', {'product_object': product_object})
 
 
+from django.shortcuts import redirect
+
+
 @login_required(login_url='green:home') 
 def panier_view(request):
     user = request.user
     if request.method == "POST":
         items = request.POST.get('items')
-        total_str = request.POST.get('total', '0').replace(" FCFA", "").replace("FCFA", "").strip()
-        try:
-            total = int(total_str)
-        except ValueError:
-            total = 0  # Ou retourner une erreur
-
+        total = request.POST.get('total')
         nom = request.POST.get('nom')
         email = request.POST.get('email')
         address = request.POST.get('address')
@@ -91,26 +79,13 @@ def panier_view(request):
         zipcode = request.POST.get('zipcode')
         taille = request.POST.get('taille')
 
-        # Enregistrer la commande
-        com = Command(
-            user=user,
-            items=items,
-            nom=nom,
-            email=email,
-            address=address,
-            ville=ville,
-            pays=pays,
-            zipcode=zipcode,
-            taille=taille,
-            total=total
-        )
+        com = Command(user=user, items=items, nom=nom, email=email, address=address,
+                      ville=ville, pays=pays, zipcode=zipcode, taille=taille, total=total)
         com.save()
 
-        # Rediriger vers le paiement PayTech avec l'ID de la commande
-        return redirect('green:cinetpay_payment', commande_id=com.id)
+        return redirect('green:confirmation')  # <-- à adapter selon le nom de ton URL
 
     return render(request, 'green/panier.html', {'user': user})
-
 
     
 @login_required
@@ -149,7 +124,6 @@ def sacs(request):
     context = {'product_object': produits}
     return render(request, 'green/sacs.html', context)
 
-
 @login_required
 def Historique(request):
     commandes = Command.objects.filter(user=request.user)  # 🔒 Filtre par utilisateur connecté
@@ -185,77 +159,3 @@ def politique_view(request):
 
 def savoir_view(request):
     return render(request, 'green/savoir.html')
-
-
-@login_required(login_url='green:home') 
-def cinetpay_payment(request, commande_id):
-    commande = get_object_or_404(Command, id=commande_id)
-
-    montant = 100  # ✅ Le client paie seulement les frais de livraison
-
-    transaction_id = str(uuid.uuid4())
-    commande.transaction_id = transaction_id
-    commande.save()
-
-    payload = {
-        "amount": montant,
-        "currency": "XOF",
-        "apikey": settings.CINETPAY_API_KEY,
-        "site_id": settings.CINETPAY_SITE_ID,
-        "transaction_id": transaction_id,
-        "description": "Paiement des frais de livraison uniquement",
-        "return_url": settings.CINETPAY_RETURN_URL,
-        "notify_url": settings.CINETPAY_NOTIFY_URL,
-        "metadata": str(commande.id),
-        "customer_id": str(commande.user.id) if commande.user else "anonyme",
-        "customer_name": commande.nom,
-        "customer_surname": "",
-        "customer_email": commande.email,
-        "customer_phone_number": commande.zipcode,
-        "customer_address": commande.address,
-        "customer_city": commande.ville,
-        "customer_country": "CI",
-        "customer_state": "CI",
-        "customer_zip_code": "00225",
-        "channels": "ALL",
-        "lang": "FR",
-        "invoice_data": {
-            "Produit": "Frais de livraison",
-            "Quantité": "1",
-            "Type": "Commande en ligne"
-        }
-    }
-
-    headers = {
-        "Content-Type": "application/json",
-        "apikey": settings.CINETPAY_API_KEY
-    }
-
-    try:
-        response = requests.post("https://api-checkout.cinetpay.com/v2/payment", json=payload, headers=headers, timeout=10)
-        data = response.json()
-
-        if data.get("code") == "201":
-            return redirect(data["data"]["payment_url"])
-        else:
-            return HttpResponse("Erreur CinetPay : " + response.text, status=500)
-    except requests.exceptions.Timeout:
-        return HttpResponse("⏳ Délai dépassé lors de la connexion à CinetPay.", status=504)
-    except Exception as e:
-        return HttpResponse("❌ Erreur lors du paiement : " + str(e), status=500)
-
-@csrf_exempt
-def notify(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        transaction_id = data.get('transaction_id')
-
-        try:
-            commande = Command.objects.get(transaction_id=transaction_id)
-            commande.paye = True
-            commande.save()
-            return JsonResponse({'status': 'Paiement confirmé'})
-        except Command.DoesNotExist:
-            return JsonResponse({'error': 'Commande non trouvée'}, status=404)
-
-    return HttpResponse("Méthode non autorisée", status=405)

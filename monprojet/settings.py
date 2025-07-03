@@ -178,8 +178,8 @@ CSRF_FAILURE_VIEW = 'accounts.views.custom_csrf_failure_view'
 
 # settings.py
 
-CINETPAY_SITE_ID = '105900199'
-CINETPAY_API_KEY = '4437493986862db5847de80.28582446'
-CINETPAY_NOTIFY_URL = 'https://bluecall-site.onrender.com/notify/'   # Tu peux mettre temporairement https://bluecall-site.onrender.com/notify/
-CINETPAY_RETURN_URL = 'https://bluecall-site.onrender.com/green/confirmation/'    # Page de retour après paiement
+#CINETPAY_SITE_ID = '105900199'
+#CINETPAY_API_KEY = '4437493986862db5847de80.28582446'
+#CINETPAY_NOTIFY_URL = 'https://bluecall-site.onrender.com/notify/'   # Tu peux mettre temporairement https://bluecall-site.onrender.com/notify/
+#CINETPAY_RETURN_URL = 'https://bluecall-site.onrender.com/green/confirmation/'    # Page de retour après paiement
 

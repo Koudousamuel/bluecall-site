@@ -27,9 +27,16 @@ class AdminProduct(admin.ModelAdmin):
 def marquer_comme_livree(modeladmin, request, queryset):
     queryset.update(statut='livrée')
 
+# ✅ Action personnalisée
+@admin.action(description="Marquer comme payée")
+def marquer_comme_paye(modeladmin, request, queryset):
+    queryset.update(paye=True)
+
 class AdminCommand(admin.ModelAdmin):
-    list_display = ('items', 'total', 'nom', 'address', 'email', 'ville', 'pays', 'zipcode', 'date_command', 'taille', 'statut', 'transaction_id','paye')
-    actions = [marquer_comme_livree]  # Ajouter l'action de mise à jour du statut
+    list_display = ('items', 'total', 'nom', 'address', 'email', 'ville', 'pays', 'zipcode', 'date_command', 'taille', 'statut','paye')
+    list_editable = ('paye',)  # ✅ Maintenant on peut modifier le statut de paiement
+    actions = [marquer_comme_livree, marquer_comme_paye]
+    # Ajouter l'action de mise à jour du statut
 
 # Enregistrement des modèles dans l'admin
 admin.site.register(Product, AdminProduct)
