@@ -79,7 +79,7 @@ def panier_view(request):
         zipcode = request.POST.get('zipcode')
         taille = request.POST.get('taille')
 
-        com = Command(user=user, items=items, nom=nom, email=email, address=address,
+        com = Command(user=request.user, items=items, nom=nom, email=email, address=address,
                       ville=ville, pays=pays, zipcode=zipcode, taille=taille, total=total)
         com.save()
 
