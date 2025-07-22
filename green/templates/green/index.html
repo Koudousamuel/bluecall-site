@@ -38,122 +38,108 @@
     {% endfor %}
 </div>
 
+{% endblock %}
 
 {% block scripts %}
 
+
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const boutonPanier = document.getElementById("panier");
+    let popoverInstance = null;
+    let popoverVisible = false;
 
-$(document).ready(function () {
-    let panier = {};
-
-    if (localStorage.getItem('panier') == null) {
-        panier = {};
-    } else {
-        panier = JSON.parse(localStorage.getItem('panier'));
-    }
-
-    $("#panier").html("Voir(" + Object.keys(panier).length + ")");
-    AfficherListe(panier);
-
-    // Écoute le clic même sur les nouveaux boutons ajoutés dynamiquement
-    $(document).on('click', '.ted', function () {
-        const item_id = $(this).data("id").toString();
-        const nomArticle = $(this).data("nom") || "Article inconnu";
-
-        // Récupération et nettoyage du prix
-        let rawPrice = document.getElementById("price" + item_id).innerHTML;
-        let cleanedPrice = rawPrice.replace(/[^\d,.-]/g, '').replace(',', '.'); // garde la virgule et transforme en point
-        let prixFinal = parseFloat(cleanedPrice);
-
-
-        if (panier[item_id] !== undefined) {
-            panier[item_id].quantite += 1;
-            panier[item_id].prix += prixFinal;
-        } else {
-            panier[item_id] = {
-                nom: nomArticle,
-                quantite: 1,
-                prix: prixFinal
-            };
-        }
-
-        localStorage.setItem('panier', JSON.stringify(panier));
-        $("#panier").html("Voir(" + Object.keys(panier).length + ")");
-        AfficherListe(panier);
-    });
-});
-
-
-function AfficherListe(panier) {
-    let panierString = "<h5>Voici votre liste</h5><ul>";
-    let index = 1;
-
-    for (let x in panier) {
-        const nom = panier[x].nom || "Article inconnu";
-        const quantite = panier[x].quantite || 0;
-
-        panierString += `<li>${index}. ${nom} — Quantité: ${quantite}</li>`;
-        index += 1;
-    }
-
-    panierString += "</ul> <div class='text-center mt-2'><a href='/panier' class='btn btn-primary btn-sm'>Aller à l'achat</a></div>";
-
-    const boutonPanier = document.getElementById('panier');
-
-    const oldPopover = bootstrap.Popover.getInstance(boutonPanier);
-    if (oldPopover) {
-        oldPopover.dispose();
-    }
-
-    new bootstrap.Popover(boutonPanier, {
-        content: panierString,
-        html: true,
-        container: 'body',
-        placement: 'bottom'
-    });
-
-    const instance = bootstrap.Popover.getInstance(boutonPanier);
-    instance && instance.show();
-}
-
-function viderPanier() {
-    if (confirm("Voulez-vous vraiment vider le panier ?")) {
-        // 1. Supprimer le panier du localStorage
-        localStorage.removeItem('panier');
-        
-        // 2. Réinitialiser le bouton avec compteur
-        $("#panier").html("Voir(0)");
-
-        // 3. Supprimer l’ancien popover s’il existe
-        const boutonPanier = document.getElementById('panier');
-        const oldPopover = bootstrap.Popover.getInstance(boutonPanier);
-        if (oldPopover) {
-            oldPopover.dispose();
-        }
-
-        // 4. Afficher un nouveau popover vide (très important de le refaire après le dispose)
-        new bootstrap.Popover(boutonPanier, {
-            content: "<p>Votre panier est vide.</p>",
-            html: true,
-            container: 'body',
-            placement: 'bottom'
+    // ✅ Mettre à jour le bouton "Voir (x)" au chargement de la page
+    fetch("{% url 'green:panier_popover' %}")
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.panier) {
+                boutonPanier.innerText = `Voir (${data.panier.length})`;
+            }
         });
 
-        // 5. Afficher manuellement le nouveau popover
-        const newPopover = bootstrap.Popover.getInstance(boutonPanier);
-        newPopover && newPopover.show();
+    // Fonction pour charger et afficher le popover
+    function afficherPopover() {
+        fetch("{% url 'green:panier_popover' %}")
+            .then(response => response.json())
+            .then(data => {
+                let contenu = "<h5>Voici votre liste</h5><ul>";
 
-        // 6. Vider l'affichage des produits dans la page (si tu veux aussi)
-        $("#produits-container").html("<p class='text-center'>Votre panier est vide.</p>");
+                if (data.panier.length > 0) {
+                    data.panier.forEach((item, index) => {
+                        contenu += `<li>${index + 1}. ${item.nom} — Quantité: ${item.quantite}</li>`;
+                    });
+                } else {
+                    contenu += "<li>Votre panier est vide.</li>";
+                }
+
+                contenu += "</ul><div class='text-center mt-2'><a href='/panier' class='btn btn-primary btn-sm'>Aller à l'achat</a></div>";
+
+                // Détruire ancienne instance
+                if (popoverInstance) {
+                    popoverInstance.dispose();
+                }
+
+                // Créer nouvelle instance
+                popoverInstance = new bootstrap.Popover(boutonPanier, {
+                    content: contenu,
+                    html: true,
+                    container: 'body',
+                    placement: 'bottom',
+                    trigger: 'manual'
+                });
+
+                popoverInstance.show();
+                popoverVisible = true;
+            });
     }
-}
 
+    // ✅ Quand on clique sur "Voir (x)"
+    boutonPanier.addEventListener("click", function () {
+        if (popoverVisible) {
+            if (popoverInstance) {
+                popoverInstance.dispose();
+                popoverInstance = null;
+            }
+            popoverVisible = false;
+        } else {
+            afficherPopover();
+        }
+    });
 
+    // ✅ Quand on clique sur un bouton "Ajouter"
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('ted')) {
+            const produitId = e.target.getAttribute('data-id');
 
-
+            fetch("{% url 'green:ajouter_au_panier' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ produit_id: produitId })
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.status === 'success') {
+                    boutonPanier.innerText = `Voir (${data.total})`;
+                    afficherPopover(); // ✅ Affiche ou met à jour le popover
+                } else if (data && data.status === 'error') {
+                    alert(data.message || "Erreur lors de l'ajout au panier.");
+                }
+            });
+        }
+    });
+});
 </script>
 
-{% endblock %}
+
 
 {% endblock %}
-

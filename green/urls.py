@@ -20,7 +20,9 @@ urlpatterns = [
     path('Politique de Confidentialité/', views.politique_view, name='politique'),
     path('A propos/', views.savoir_view, name='savoir'),
     path('commande/<int:commande_id>/livree/', views.marquer_comme_livree, name='marquer_comme_livree'),
-    #path("payer-cinetpay/<int:commande_id>/", views.cinetpay_payment, name="cinetpay_payment"),
-    #path("api/cinetpay/notify/", views.notify, name="cinetpay_notify"),  # Si ce n'est pas déjà présent
+    path('ajouter-au-panier/', views.ajouter_au_panier, name='ajouter_au_panier'),
+    path('ajax/panier-popover/', views.panier_popover_data, name='panier_popover'),
+    path('vider-panier/', views.vider_panier, name='vider_panier'),
 
 ]
+

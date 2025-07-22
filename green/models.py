@@ -25,10 +25,13 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     price = models.FloatField()
-    description = models.TextField()
-    category = models.ForeignKey(Category, related_name='categorie', on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    category = models.ForeignKey(Category, related_name='categorie', on_delete=models.CASCADE, null=True, blank=True)
+
     images = models.CharField(max_length=5000, blank=True, null=True)
-    image_file = CloudinaryField('image', blank=True, null=True)  # <-- Modifié ici
+    image_file = CloudinaryField('image', blank=True, null=True)
+    image = models.ImageField(upload_to='produits/', null=True, blank=True)
+
     date_added = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -36,11 +39,28 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
     @property
     def get_image(self):
         if self.image_file:
             return self.image_file.url
-        return self.images
+        elif self.image:
+            return self.image.url
+        return self.images or ''
+
+
+
+class PanierItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    produit = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantite = models.PositiveIntegerField(default=1)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'produit')  # ✅ empêche les doublons futurs
+
+    def __str__(self):
+        return f"{self.quantite} x {self.produit.title} pour {self.user.username}"
 
 
 class Command(models.Model):
@@ -66,7 +86,7 @@ class Command(models.Model):
     def get_products(self):
         return self.orderitem_set.all()
 
-
+    
 class OrderItem(models.Model):
     command = models.ForeignKey(Command, on_delete=models.CASCADE)
     product_nom = models.ForeignKey(Product, on_delete=models.CASCADE)

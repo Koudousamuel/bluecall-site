@@ -34,9 +34,36 @@
     <!-- Panier -->
     <div class="row mb-4">
       <div class="col-12">
+
         <ul class="list-group" id="item_list">
-          <!-- Les éléments du panier seront injectés ici par JS -->
-        </ul>
+
+          {% if items %}
+          {% for item in items %}
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+
+            {{ forloop.counter }}. {{ item.produit.title }}
+
+            <span class="badge bg-primary rounded-pill">QTE: {{ item.quantite }}</span>
+            <span class="badge bg-danger rounded-pill">Prix: {{ item.produit.price|floatformat:0 }} FCFA</span>
+          </li>
+         {% endfor %}
+
+        <div class="mt-3 text-end">
+          <h5>Total Quantité: <span class="badge bg-primary">{{ total_quantite }}</span></h5>
+          <h5>Total Prix: <span class="badge bg-warning text-dark">{{ total }} FCFA</span></h5>
+
+          <a href="{% url 'green:vider_panier' %}" class="btn btn-primary mt-2"
+          onclick="return confirm('Voulez-vous vraiment vider le panier ?')">
+          Vider le panier
+          </a>
+        </div>
+
+        {% else %}
+          <li class="list-group-item">Aucun article dans le panier</li>
+        {% endif %}
+      </ul>
+
       </div>
     </div>
 
@@ -101,12 +128,8 @@
 
               <div class="form-group mt-2">
                 <label for="total" class="form-label fw-bold">Total à payer :</label>
-                <input type="text" id="total" name="total" class="form-control fw-bold" value="0 FCFA" readonly
+                  <input type="text" id="total" name="total" class="form-control fw-bold" value="{{ total }} FCFA" readonly
                   style="background-color: #f1f1f1; border: none; font-size: 1.3rem;">
-
-                <small class="text-danger fw-semibold d-block mt-1">
-                  ⚠️ En appuyant sur le bouton commander, vous confirmez votre commande. Le service client BlueCall vous contactera dans un délai de 12 heures maximuns pour les vérifications et le règlement des frais de livraison, fixés à <strong>2000 FCFA</strong>.
-                </small>
 
               </div>
             </div>
@@ -129,68 +152,28 @@
     </div>
   </div>
 
-  <script>
- document.addEventListener('DOMContentLoaded', function () {
-        let panier = localStorage.getItem('panier');
-        if (panier) {
-            panier = JSON.parse(panier);
-            const itemList = document.getElementById('item_list');
-            itemList.innerHTML = '';
-    
-            let index = 1;
-            let totalPrix = 0;
-            let totalQuantite = 0;
-    
-            for (let key in panier) {
-                const item = panier[key];
-                const nom = (typeof item.nom === "string" && item.nom.trim() !== "") ? item.nom : "Article invalide";
-                const quantite = item.quantite || 1;
-                const prix = item.prix || 0;
-    
-                const li = document.createElement('li');
-                li.className = "list-group-item d-flex justify-content-between align-items-center";
-                li.innerHTML = `
-                    ${index}. ${nom}
-                    <span class="badge bg-primary rounded-pill">QTE: ${quantite}</span>
-                    <span class="badge bg-danger rounded-pill">Prix: ${prix} FCFA</span>
-                `;
-                itemList.appendChild(li);
-                index++;
-                totalPrix += prix;
-                totalQuantite += quantite;
-            }
-    
-            // ✅ Bloc total visuel sous la liste
-            const totalBlock = document.createElement('div');
-            totalBlock.className = "mt-3 text-end";
-            totalBlock.innerHTML = `
-                <h5>Total Quantité: <span class="badge bg-primary">${totalQuantite}</span></h5>
-                <h5>Total Prix: <span class="badge bg-warning text-dark">${totalPrix} FCFA</span></h5>
-                <button class="btn btn-primary" onclick="viderPanier()">Vider le panier</button>
-            `;
-            itemList.appendChild(totalBlock);
-    
-            // ✅ Mise à jour du champ "Total à payer"
-            document.getElementById('total').value = totalPrix + ' FCFA';
-    
-            // ✅ Champs cachés
-            document.getElementById('items').value = JSON.stringify(Object.values(panier));
-            document.getElementById('prix_total').value = totalPrix;
-            document.getElementById('quantite_total').value = totalQuantite;
-    
-        } else {
-            document.getElementById('item_list').innerHTML = '<li class="list-group-item">Aucun article dans le panier</li>';
-            document.getElementById('affichage_total').value = '0 FCFA';
-        }
-    });
-    
-    function viderPanier() {
-        if (confirm("Voulez-vous vraiment vider le panier ?")) {
-            localStorage.removeItem('panier');
-            location.reload();
-        }
-    }
+  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Reconstituer le panier à partir du DOM
+    const items = [];
 
-    </script>
+    document.querySelectorAll("#item_list li").forEach(li => {
+      const nomProduit = li.childNodes[0].textContent.trim().split(". ")[1];
+      const quantite = parseInt(li.querySelector('.bg-primary')?.textContent.replace(/\D/g, '') || "1");
+      const prix = parseInt(li.querySelector('.bg-danger')?.textContent.replace(/\D/g, '') || "0");
+
+      if (nomProduit) {
+        items.push({ nom: nomProduit, quantite: quantite, prix: prix });
+      }
+    });
+
+    // Enregistre les items dans le champ caché
+    document.getElementById("items").value = JSON.stringify(items);
+  });
+</script>
+
 </body>
+
 </html>
+

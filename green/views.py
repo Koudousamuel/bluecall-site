@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Category, Command
+from .models import Product, Category, Command, PanierItem 
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Command, OrderItem
@@ -61,15 +61,13 @@ def detail(request, myid):
     product_object = Product.objects.get(id=myid)
     return render(request, 'green/detail.html', {'product_object': product_object})
 
-
-from django.shortcuts import redirect
-
-
-@login_required(login_url='green:home') 
+@login_required(login_url='green:home')
 def panier_view(request):
     user = request.user
+
     if request.method == "POST":
-        items = request.POST.get('items')
+        # ✅ Récupérer les données du formulaire
+        items_json = request.POST.get('items')
         total = request.POST.get('total')
         nom = request.POST.get('nom')
         email = request.POST.get('email')
@@ -79,15 +77,109 @@ def panier_view(request):
         zipcode = request.POST.get('zipcode')
         taille = request.POST.get('taille')
 
-        com = Command(user=request.user, items=items, nom=nom, email=email, address=address,
-                      ville=ville, pays=pays, zipcode=zipcode, taille=taille, total=total)
-        com.save()
+        # ✅ Créer la commande principale
+        commande = Command.objects.create(
+            user=user,
+            items=items_json,
+            nom=nom,
+            email=email,
+            address=address,
+            ville=ville,
+            pays=pays,
+            zipcode=zipcode,
+            taille=taille,
+            total=total,
+            date_command=timezone.now()
+        )
 
-        return redirect('green:confirmation')  # <-- à adapter selon le nom de ton URL
+        # ✅ Parser les items et créer les OrderItem
+        try:
+            items = json.loads(items_json)
+            for item in items:
+                produit_nom = item.get('nom')
+                quantite = int(item.get('quantite', 1))
+                prix = float(item.get('prix', 0))
 
-    return render(request, 'green/panier.html', {'user': user})
+                # ✅ Corrigé : éviter l'erreur MultipleObjectsReturned
+                produit = Product.objects.filter(title=produit_nom).first()
+                if produit:
+                    OrderItem.objects.create(
+                        command=commande,
+                        product_nom=produit,
+                        quantity=quantite,
+                        price=prix
+                    )
+                else:
+                    print(f"Produit introuvable : {produit_nom}")
 
-    
+        except json.JSONDecodeError as e:
+            print("Erreur JSON dans les items du panier :", e)
+
+        # ✅ Vider le panier après la commande
+        PanierItem.objects.filter(user=user).delete()
+
+        return redirect('green:confirmation')
+
+    # 👇 cas GET : afficher le contenu du panier
+    items = PanierItem.objects.filter(user=user)
+    total = sum(item.produit.price * item.quantite for item in items)
+    total_quantite = sum(item.quantite for item in items)
+
+    return render(request, 'green/panier.html', {
+        'user': user,
+        'items': items,
+        'total': total,
+        'total_quantite': total_quantite
+    })
+
+
+
+
+@login_required
+def panier_popover_data(request):
+    panier_items = PanierItem.objects.filter(user=request.user)
+    data = []
+
+    for item in panier_items:
+        data.append({
+            'nom': item.produit.title,
+            'quantite': item.quantite
+        })
+
+    return JsonResponse({'panier': data})
+
+@login_required
+def ajouter_au_panier(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            produit_id = data.get('produit_id')
+            produit = Product.objects.get(id=produit_id)
+        except (Product.DoesNotExist, ValueError, KeyError):
+            return JsonResponse({'status': 'error', 'message': 'Produit introuvable ou données invalides'}, status=400)
+
+        user = request.user
+
+        item, created = PanierItem.objects.get_or_create(user=user, produit=produit)
+
+        if not created:
+            item.quantite += 1
+            item.save()
+
+        total = PanierItem.objects.filter(user=user).count()
+
+        return JsonResponse({'status': 'success', 'message': 'Ajouté au panier', 'total': total})
+
+    return JsonResponse({'status': 'error', 'message': 'Méthode non autorisée'}, status=405)
+
+
+@login_required
+def vider_panier(request):
+    PanierItem.objects.filter(user=request.user).delete()
+    return redirect('green:panier') 
+
+
+
 @login_required
 def profil(request):
     user = request.user
