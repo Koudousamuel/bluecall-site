@@ -10,9 +10,16 @@ from .models import Command, OrderItem
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 
+def create_admin(request):
+    if User.objects.filter(username="admin").exists():
+        return HttpResponse("Admin existe déjà")
+    else:
+        User.objects.create_superuser("admin", "admin@example.com", "motdepasse123")
+        return HttpResponse("Admin créé avec succès")
 
-    
 def principale(request):
     return render(request, 'green/principale.html')
 
