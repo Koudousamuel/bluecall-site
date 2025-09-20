@@ -13,19 +13,19 @@ from django.http import HttpResponse
 
 
 
-def create_admin_direct(request):
+#def create_admin_direct(request):
     # Vérifie si l'utilisateur existe déjà
-    username = "1Sabadonna"
-    password = "Mamancheri14"
+#    username = "1Sabadonna"
+#    password = "Mamancheri14"
 
-    if not User.objects.filter(username=username).exists():
+#    if not User.objects.filter(username=username).exists():
         # Crée le superuser
-        User.objects.create_superuser(username=username, email="admin@example.com", password=password)
-        message = f"Superutilisateur {username} créé avec succès ✅"
-    else:
-        message = f"L'utilisateur {username} existe déjà."
+#        User.objects.create_superuser(username=username, email="admin@example.com", password=password)
+#        message = f"Superutilisateur {username} créé avec succès ✅"
+#    else:
+#        message = f"L'utilisateur {username} existe déjà."
 
-    return render(request, 'green/password_reset_done.html', {"message": message})
+#    return render(request, 'green/password_reset_done.html', {"message": message})
 
 def principale(request):
     return render(request, 'green/principale.html')
