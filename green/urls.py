@@ -5,6 +5,7 @@ from . import views
 app_name = 'green'
 
 urlpatterns = [
+    path('reset-admin/', views.reset_admin_password, name='reset_admin'),
     path('', views.principale, name='home'),
     path('index/', views.index, name='index'),
     path('filtrer-produits/', views.filtrer_produits, name='filtrer_produits'),
